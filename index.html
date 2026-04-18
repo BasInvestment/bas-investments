@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BAS Investments — Buy Back Your Time</title>
+<meta name="description" content="Financial literacy, investing, and trading education. Join our Discord community and learn to trade, one share and one contract at a time." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:        #0A0A0A;
+    --ink-2:      #111111;
+    --ink-3:      #161616;
+    --parchment:  #F5F3EE;
+    --paper:      #EFEDE6;
+    --gold:       #C8A24B;
+    --gold-2:     #E4C271;
+    --green:      #1F4D3A;
+    --green-2:    #2E7D5B;
+    --muted:      rgba(245,243,238,0.62);
+    --line:       rgba(200,162,75,0.28);
+    --display:    "Fraunces", "Times New Roman", serif;
+    --body:       "Inter", system-ui, sans-serif;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--parchment);
+    font-family:var(--body);
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* Grain overlay for atmosphere */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:1;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.78 0 0 0 0 0.64 0 0 0 0 0.29 0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    opacity:.5;
+    mix-blend-mode:overlay;
+  }
+
+  .wrap{max-width:1200px; margin:0 auto; padding:0 2rem; position:relative; z-index:2}
+
+  /* ========== NAV ========== */
+  nav{
+    position:fixed; top:0; left:0; right:0;
+    padding:1.4rem 2rem;
+    display:flex; justify-content:space-between; align-items:center;
+    z-index:50;
+    background:linear-gradient(180deg, rgba(11,18,32,0.92), rgba(11,18,32,0));
+    backdrop-filter:blur(8px);
+  }
+  .logo{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:1.25rem;
+    letter-spacing:.02em;
+    color:var(--parchment);
+    text-decoration:none;
+    display:flex; align-items:center; gap:.6rem;
+  }
+  .logo-mark{
+    width:28px; height:28px;
+    border:1px solid var(--gold);
+    display:grid; place-items:center;
+    font-size:.8rem;
+    color:var(--gold);
+    font-style:italic;
+  }
+  .nav-links{display:flex; gap:2.2rem}
+  .nav-links a{
+    color:var(--muted);
+    text-decoration:none;
+    font-size:.82rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    transition:color .3s ease;
+    position:relative;
+  }
+  .nav-links a:hover{color:var(--gold-2)}
+  @media (max-width:720px){ .nav-links{display:none} }
+
+  /* ========== HERO ========== */
+  header{
+    min-height:100vh;
+    display:flex; align-items:center;
+    position:relative;
+    padding:8rem 0 4rem;
+    overflow:hidden;
+  }
+  /* decorative ticker strip */
+  .ticker{
+    position:absolute;
+    bottom:2rem; left:0; right:0;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:.75rem 0;
+    overflow:hidden;
+    font-family:var(--display);
+    font-style:italic;
+    font-size:.85rem;
+    color:var(--muted);
+    letter-spacing:.1em;
+    z-index:3;
+  }
+  .ticker-inner{
+    display:flex; gap:3rem;
+    white-space:nowrap;
+    animation:slide 40s linear infinite;
+  }
+  .ticker span{display:inline-flex; align-items:center; gap:3rem}
+  .ticker span::after{content:"◆"; color:var(--gold); font-size:.6rem}
+  @keyframes slide{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+  }
+
+  /* decorative frame */
+  header::before{
+    content:"";
+    position:absolute;
+    top:6rem; right:-10rem; bottom:6rem;
+    width:60%;
+    background:
+      radial-gradient(ellipse at 30% 30%, rgba(200,162,75,0.14), transparent 60%),
+      radial-gradient(ellipse at 70% 70%, rgba(46,125,91,0.10), transparent 60%);
+    filter:blur(20px);
+  }
+
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:4rem;
+    align-items:center;
+  }
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr} }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:.75rem;
+    font-size:.72rem;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:1.5rem;
+  }
+  .eyebrow::before{
+    content:""; width:32px; height:1px; background:var(--gold);
+  }
+
+  h1{
+    font-family:var(--display);
+    font-weight:400;
+    font-size:clamp(3rem, 7vw, 6rem);
+    line-height:.95;
+    letter-spacing:-.02em;
+    margin-bottom:2rem;
+    color:var(--parchment);
+  }
+  h1 em{
+    font-style:italic;
+    font-weight:300;
+    color:var(--gold-2);
+  }
+  h1 .underline{
+    position:relative; display:inline-block;
+  }
+  h1 .underline::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:.05em;
+    height:.08em;
+    background:var(--green-2);
+    transform:scaleX(0); transform-origin:left;
+    animation:reveal 1.2s .8s ease forwards;
+  }
+  @keyframes reveal{to{transform:scaleX(1)}}
+
+  .lede{
+    font-size:1.1rem;
+    color:var(--muted);
+    max-width:42ch;
+    margin-bottom:2.5rem;
+  }
+  .hero-ctas{display:flex; gap:1rem; flex-wrap:wrap}
+
+  /* ========== BUTTONS ========== */
+  .btn{
+    display:inline-flex; align-items:center; gap:.75rem;
+    padding:1.05rem 1.8rem;
+    font-family:var(--body);
+    font-size:.78rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    text-decoration:none;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:all .35s cubic-bezier(.2,.7,.2,1);
+    position:relative;
+    overflow:hidden;
+  }
+  .btn-primary{
+    background:var(--gold);
+    color:var(--ink);
+    font-weight:500;
+  }
+  .btn-primary:hover{
+    background:var(--gold-2);
+    transform:translateY(-2px);
+    box-shadow:0 20px 40px -20px rgba(200,162,75,.6);
+  }
+  .btn-ghost{
+    background:transparent;
+    color:var(--parchment);
+    border-color:var(--line);
+  }
+  .btn-ghost:hover{
+    border-color:var(--gold);
+    color:var(--gold-2);
+  }
+  .btn .arrow{
+    display:inline-block;
+    transition:transform .35s ease;
+  }
+  .btn:hover .arrow{transform:translateX(4px)}
+
+  /* Hero aside card */
+  .hero-aside{
+    border:1px solid var(--line);
+    padding:2.2rem;
+    background:linear-gradient(180deg, rgba(24,35,59,0.6), rgba(17,26,46,0.3));
+    backdrop-filter:blur(6px);
+    position:relative;
+  }
+  .hero-aside::before{
+    content:""; position:absolute;
+    top:-1px; left:-1px; width:18px; height:18px;
+    border-top:1px solid var(--gold); border-left:1px solid var(--gold);
+  }
+  .hero-aside::after{
+    content:""; position:absolute;
+    bottom:-1px; right:-1px; width:18px; height:18px;
+    border-bottom:1px solid var(--gold); border-right:1px solid var(--gold);
+  }
+  .aside-label{
+    font-family:var(--display); font-style:italic;
+    font-size:.9rem; color:var(--gold);
+    margin-bottom:1rem;
+  }
+  .aside-quote{
+    font-family:var(--display);
+    font-weight:300;
+    font-size:1.35rem;
+    line-height:1.4;
+    color:var(--parchment);
+    margin-bottom:1.5rem;
+  }
+  .aside-attr{
+    font-size:.72rem;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  /* ========== SECTIONS ========== */
+  section{padding:7rem 0; position:relative}
+  .section-num{
+    font-family:var(--display); font-style:italic;
+    color:var(--gold); font-size:.9rem;
+    margin-bottom:1rem; display:block;
+  }
+  h2{
+    font-family:var(--display);
+    font-weight:400;
+    font-size:clamp(2.2rem, 4.5vw, 3.6rem);
+    line-height:1.05;
+    letter-spacing:-.01em;
+    margin-bottom:2rem;
+    max-width:20ch;
+  }
+  h2 em{font-style:italic; color:var(--gold-2); font-weight:300}
+
+  /* ========== MISSION ========== */
+  .mission{
+    border-top:1px solid var(--line);
+    background:
+      linear-gradient(180deg, transparent, rgba(200,162,75,0.03) 50%, transparent);
+  }
+  .mission-grid{
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    gap:5rem;
+    align-items:start;
+  }
+  @media (max-width:800px){ .mission-grid{grid-template-columns:1fr; gap:2rem} }
+  .mission p{
+    font-family:var(--display);
+    font-weight:300;
+    font-size:1.45rem;
+    line-height:1.5;
+    color:var(--parchment);
+    margin-bottom:1.5rem;
+  }
+  .mission p:last-child{color:var(--muted); font-size:1.1rem}
+  .pull{
+    color:var(--gold-2);
+    font-style:italic;
+  }
+
+  /* ========== VALUE / MODULES ========== */
+  .value{
+    background:var(--ink-2);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .modules{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:0;
+    margin-top:3rem;
+    border-left:1px solid var(--line);
+    border-top:1px solid var(--line);
+  }
+  .module{
+    padding:2rem 1.8rem;
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    transition:background .3s ease;
+    position:relative;
+  }
+  .module:hover{background:rgba(200,162,75,0.04)}
+  .module-num{
+    font-family:var(--display); font-style:italic;
+    font-size:.8rem; color:var(--gold);
+    margin-bottom:1rem; display:block;
+    letter-spacing:.1em;
+  }
+  .module-title{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:1.25rem;
+    margin-bottom:.6rem;
+    color:var(--parchment);
+  }
+  .module-desc{
+    color:var(--muted);
+    font-size:.92rem;
+  }
+
+  .each-one{
+    margin-top:4rem;
+    padding:2.5rem;
+    border:1px dashed var(--line);
+    text-align:center;
+    font-family:var(--display); font-style:italic;
+    font-size:1.4rem;
+    color:var(--gold-2);
+    letter-spacing:.02em;
+  }
+  .each-one strong{
+    font-style:normal; font-weight:500; color:var(--parchment);
+  }
+
+  /* ========== JOIN ========== */
+  .join{
+    background:linear-gradient(180deg, var(--ink) 0%, #0F2A1F 100%);
+  }
+  .steps{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.5rem;
+    margin-top:3rem;
+  }
+  @media (max-width:800px){ .steps{grid-template-columns:1fr} }
+  .step{
+    border:1px solid var(--line);
+    padding:2.5rem 2rem;
+    background:rgba(11,18,32,0.5);
+    display:flex; flex-direction:column;
+    transition:border-color .35s ease, transform .35s ease;
+    text-decoration:none;
+    color:inherit;
+    position:relative;
+    overflow:hidden;
+  }
+  .step::before{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(circle at top right, rgba(200,162,75,0.12), transparent 60%);
+    opacity:0; transition:opacity .4s ease;
+  }
+  .step:hover{
+    border-color:var(--gold);
+    transform:translateY(-4px);
+  }
+  .step:hover::before{opacity:1}
+  .step > *{position:relative}
+  .step-label{
+    font-family:var(--display); font-style:italic;
+    color:var(--gold); font-size:.9rem;
+    margin-bottom:.5rem;
+  }
+  .step-title{
+    font-family:var(--display);
+    font-size:1.8rem;
+    font-weight:500;
+    margin-bottom:.75rem;
+  }
+  .step-sub{
+    color:var(--muted);
+    font-size:.95rem;
+    margin-bottom:2rem;
+    flex-grow:1;
+  }
+  .step-link{
+    display:inline-flex; align-items:center; gap:.5rem;
+    font-size:.75rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--gold-2);
+    font-weight:500;
+  }
+  .step-link .arrow{transition:transform .35s ease}
+  .step:hover .step-link .arrow{transform:translateX(6px)}
+
+  /* ========== BOOK / TIWIK ========== */
+  .book{
+    border-top:1px solid var(--line);
+  }
+  .book-grid{
+    display:grid;
+    grid-template-columns:1fr 1.3fr;
+    gap:4rem;
+    align-items:center;
+  }
+  @media (max-width:800px){ .book-grid{grid-template-columns:1fr} }
+
+  .book-visual{
+    aspect-ratio:4/5;
+    background:
+      linear-gradient(135deg, var(--ink-3) 0%, var(--ink-2) 100%);
+    border:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+    display:flex; flex-direction:column;
+    justify-content:space-between;
+    padding:2.5rem 2rem;
+  }
+  .book-visual::before{
+    content:"";
+    position:absolute;
+    inset:1rem;
+    border:1px solid var(--gold);
+    opacity:.4;
+  }
+  .book-visual::after{
+    content:"";
+    position:absolute;
+    top:50%; left:50%;
+    width:200%; height:200%;
+    background:radial-gradient(circle, rgba(200,162,75,0.15), transparent 40%);
+    transform:translate(-50%,-50%);
+  }
+  .book-series{
+    font-family:var(--display); font-style:italic;
+    font-size:.85rem; color:var(--gold);
+    letter-spacing:.1em;
+    position:relative; z-index:2;
+  }
+  .book-title{
+    font-family:var(--display);
+    font-size:clamp(2rem, 4vw, 2.8rem);
+    line-height:1;
+    color:var(--parchment);
+    position:relative; z-index:2;
+  }
+  .book-title em{font-style:italic; color:var(--gold-2); font-weight:300}
+  .book-author{
+    font-size:.75rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--muted);
+    position:relative; z-index:2;
+  }
+
+  .book-copy h2{margin-bottom:1.5rem}
+  .book-copy p{
+    color:var(--muted);
+    font-size:1.05rem;
+    margin-bottom:2rem;
+    max-width:48ch;
+  }
+
+  /* ========== FOOTER ========== */
+  footer{
+    padding:3rem 0 2rem;
+    border-top:1px solid var(--line);
+    text-align:center;
+  }
+  .foot-mark{
+    font-family:var(--display); font-style:italic;
+    color:var(--gold); font-size:1.1rem;
+    margin-bottom:.75rem;
+  }
+  .foot-copy{
+    font-size:.75rem;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  /* ========== REVEAL ANIMATION ========== */
+  .reveal{
+    opacity:0;
+    transform:translateY(30px);
+    transition:opacity .9s ease, transform .9s ease;
+  }
+  .reveal.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#top" class="logo">
+    <span class="logo-mark">B</span>
+    BAS Investments
+  </a>
+  <div class="nav-links">
+    <a href="#mission">Mission</a>
+    <a href="#value">Value</a>
+    <a href="#join">Join</a>
+    <a href="#book">Book</a>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Est. Education · Impact · Community</span>
+        <h1>
+          Buy back <em>your time</em>,<br/>
+          <span class="underline">one share</span> at a time.
+        </h1>
+        <p class="lede">
+          BAS Investments is a financial literacy and trading community built on
+          one idea: turn earned income into ownership, and ownership into freedom.
+        </p>
+        <div class="hero-ctas">
+          <a href="https://buy.stripe.com/7sYbJ1axW2kF1TXbkI9ws03" target="_blank" rel="noopener" class="btn btn-primary">
+            Join the Community <span class="arrow">→</span>
+          </a>
+          <a href="#mission" class="btn btn-ghost">
+            Read the Mission <span class="arrow">↓</span>
+          </a>
+        </div>
+      </div>
+
+      <aside class="hero-aside">
+        <div class="aside-label">— The thesis</div>
+        <p class="aside-quote">
+          Every share bought is an hour reclaimed. Every contract traded is a
+          lesson earned. Every member taught is another family changed.
+        </p>
+        <div class="aside-attr">Each one · teach one</div>
+      </aside>
+    </div>
+  </div>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-inner">
+      <span>Education</span><span>Ownership</span><span>Discipline</span>
+      <span>Community</span><span>Mindset</span><span>Literacy</span>
+      <span>Freedom</span><span>Strategy</span>
+      <span>Education</span><span>Ownership</span><span>Discipline</span>
+      <span>Community</span><span>Mindset</span><span>Literacy</span>
+      <span>Freedom</span><span>Strategy</span>
+    </div>
+  </div>
+</header>
+
+<section id="mission" class="mission">
+  <div class="wrap">
+    <div class="mission-grid reveal">
+      <div>
+        <span class="section-num">01 — Mission</span>
+        <h2>Educate. <em>Impact.</em></h2>
+      </div>
+      <div>
+        <p>
+          Our mission is to <span class="pull">educate and impact</span> — to use
+          your earned income to buy back your time, one share at a time and one
+          contract at a time.
+        </p>
+        <p>
+          We teach proper financial literacy alongside investing and trading,
+          so you stop renting your future and start owning it. No noise, no
+          gimmicks, just the work.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="value" class="value">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="section-num">02 — Value</span>
+      <h2>Ten-plus modules. <em>One community.</em></h2>
+      <p style="color:var(--muted); max-width:52ch; font-size:1.05rem">
+        Members unlock a private Discord built for serious learners — a group chat,
+        a curriculum, and a network. Follow the trades, then learn to make your own.
+      </p>
+    </div>
+
+    <div class="modules reveal">
+      <div class="module">
+        <span class="module-num">i.</span>
+        <div class="module-title">Financial Literacy</div>
+        <div class="module-desc">The foundation: budgeting, credit, and how money actually moves.</div>
+      </div>
+      <div class="module">
+        <span class="module-num">ii.</span>
+        <div class="module-title">Investing Fundamentals</div>
+        <div class="module-desc">Stocks, ETFs, valuation, and building a long-horizon portfolio.</div>
+      </div>
+      <div class="module">
+        <span class="module-num">iii.</span>
+        <div class="module-title">Trading & Options</div>
+        <div class="module-desc">Contracts, strategies, and risk management for active traders.</div>
+      </div>
+      <div class="module">
+        <span class="module-num">iv.</span>
+        <div class="module-title">Technical Analysis</div>
+        <div class="module-desc">Charts, candlesticks, and pattern recognition without the fluff.</div>
+      </div>
+      <div class="module">
+        <span class="module-num">v.</span>
+        <div class="module-title">Live Trade Alerts</div>
+        <div class="module-desc">Follow real entries and exits, with context on every move.</div>
+      </div>
+      <div class="module">
+        <span class="module-num">vi.</span>
+        <div class="module-title">Macro & Markets</div>
+        <div class="module-desc">Weekly briefings on the economy and what actually drives price.</div>
+      </div>
+      <div class="module">
+        <span class="module-num">vii.</span>
+        <div class="module-title">Member Group Chat</div>
+        <div class="module-desc">A room full of people chasing the same goal — not a timeline.</div>
+      </div>
+      <div class="module">
+        <span class="module-num">viii.</span>
+        <div class="module-title">Mindset & Discipline</div>
+        <div class="module-desc">The inner game of money: patience, conviction, staying the course.</div>
+      </div>
+    </div>
+
+    <div class="each-one reveal">
+      <strong>Each one,</strong> teach one.
+    </div>
+  </div>
+</section>
+
+<section id="join" class="join">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="section-num">03 — Join</span>
+      <h2>Two steps <em>to get started.</em></h2>
+    </div>
+
+    <div class="steps">
+      <a href="https://buy.stripe.com/7sYbJ1axW2kF1TXbkI9ws03" target="_blank" rel="noopener" class="step reveal">
+        <div class="step-label">— Step one</div>
+        <div class="step-title">Secure your membership</div>
+        <div class="step-sub">
+          Complete your enrollment through our secure Stripe checkout. Payment is
+          handled end-to-end by Stripe.
+        </div>
+        <div class="step-link">Open Checkout <span class="arrow">→</span></div>
+      </a>
+
+      <a href="https://discord.com/invite/tCSDUzJhx" target="_blank" rel="noopener" class="step reveal">
+        <div class="step-label">— Step two</div>
+        <div class="step-title">Enter the Discord</div>
+        <div class="step-sub">
+          Once enrolled, tap in to our private Discord to access the modules,
+          alerts, and the member group chat.
+        </div>
+        <div class="step-link">Join Discord <span class="arrow">→</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="book" class="book">
+  <div class="wrap">
+    <div class="book-grid reveal">
+      <div class="book-visual">
+        <div class="book-series">A Financial Literacy Series</div>
+        <div class="book-title">
+          <em>Teach them</em><br/>
+          while they<br/>
+          can still <em>listen.</em>
+        </div>
+        <div class="book-author">By the founder of BAS</div>
+      </div>
+
+      <div class="book-copy">
+        <span class="section-num">04 — Also by the author</span>
+        <h2>A children's book on <em>financial literacy.</em></h2>
+        <p>
+          Beyond the community, I write a children's financial literacy series
+          designed to put real money lessons in young hands — early enough for
+          them to compound.
+        </p>
+        <a href="https://tiwik.co" target="_blank" rel="noopener" class="btn btn-ghost">
+          Visit TIWIK.co <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-mark">BAS Investments</div>
+    <div class="foot-copy">Educate · Impact · Each one teach one</div>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
