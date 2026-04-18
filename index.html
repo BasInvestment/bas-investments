@@ -372,6 +372,173 @@
     font-style:normal; font-weight:500; color:var(--parchment);
   }
 
+  /* ========== RECEIPTS ========== */
+  .receipts{
+    border-top:1px solid var(--line);
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(200,162,75,0.05), transparent 50%),
+      radial-gradient(ellipse at 80% 100%, rgba(46,125,91,0.06), transparent 50%),
+      var(--ink);
+    overflow:hidden;
+  }
+  .receipts-head{
+    display:grid;
+    grid-template-columns:1fr 1.2fr;
+    gap:4rem;
+    align-items:end;
+    margin-bottom:4rem;
+  }
+  @media (max-width:800px){ .receipts-head{grid-template-columns:1fr; gap:1.5rem} }
+  .receipts-head p{
+    color:var(--muted);
+    font-size:1.05rem;
+    max-width:50ch;
+  }
+
+  /* stat banner */
+  .stat-banner{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:0;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    margin-bottom:4rem;
+  }
+  @media (max-width:700px){ .stat-banner{grid-template-columns:repeat(2, 1fr)} }
+  .stat{
+    padding:2rem 1.5rem;
+    border-right:1px solid var(--line);
+    text-align:left;
+  }
+  .stat:last-child{border-right:none}
+  @media (max-width:700px){
+    .stat:nth-child(2){border-right:none}
+    .stat:nth-child(1), .stat:nth-child(2){border-bottom:1px solid var(--line)}
+  }
+  .stat-num{
+    font-family:var(--display);
+    font-weight:400;
+    font-size:clamp(2rem, 4vw, 3rem);
+    line-height:1;
+    color:var(--gold-2);
+    margin-bottom:.5rem;
+    letter-spacing:-.02em;
+  }
+  .stat-num em{font-style:italic; font-weight:300}
+  .stat-label{
+    font-size:.7rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  /* receipt grid */
+  .receipt-grid{
+    display:grid;
+    grid-template-columns:repeat(12, 1fr);
+    gap:1.25rem;
+  }
+  .receipt{
+    position:relative;
+    background:#FFFFFF;
+    padding:.9rem .9rem 1.4rem;
+    border:1px solid rgba(255,255,255,0.08);
+    box-shadow:
+      0 30px 60px -30px rgba(0,0,0,0.9),
+      0 0 0 1px rgba(200,162,75,0.12);
+    display:flex; flex-direction:column;
+    transition:transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .5s ease;
+  }
+  .receipt:hover{
+    transform:translateY(-6px) rotate(0deg) !important;
+    box-shadow:
+      0 40px 80px -30px rgba(0,0,0,1),
+      0 0 0 1px var(--gold);
+    z-index:5;
+  }
+  /* subtle varied rotation for polaroid feel */
+  .receipt:nth-child(3n+1){ transform:rotate(-.8deg); }
+  .receipt:nth-child(3n+2){ transform:rotate(.6deg); }
+  .receipt:nth-child(3n+3){ transform:rotate(-.3deg); }
+
+  .receipt-img{
+    width:100%;
+    aspect-ratio:3/4;
+    object-fit:cover;
+    object-position:top center;
+    background:#F5F5F5;
+    display:block;
+  }
+  .receipt-meta{
+    padding-top:.9rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:.5rem;
+  }
+  .receipt-ticker{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:1rem;
+    color:#111;
+    letter-spacing:.02em;
+  }
+  .receipt-gain{
+    font-family:var(--body);
+    font-weight:600;
+    font-size:.85rem;
+    color:var(--green-2);
+    letter-spacing:.02em;
+  }
+  .receipt-caption{
+    font-family:var(--display);
+    font-style:italic;
+    font-size:.8rem;
+    color:#666;
+    margin-top:.2rem;
+  }
+
+  /* grid placement - magazine-style varied sizing */
+  .r-1{grid-column:span 4}
+  .r-2{grid-column:span 4}
+  .r-3{grid-column:span 4}
+  .r-4{grid-column:span 3}
+  .r-5{grid-column:span 3}
+  .r-6{grid-column:span 3}
+  .r-7{grid-column:span 3}
+  .r-8{grid-column:span 4}
+  .r-9{grid-column:span 4}
+  .r-10{grid-column:span 4}
+  .r-11{grid-column:span 6}
+  @media (max-width:900px){
+    .receipt-grid > *{grid-column:span 6 !important}
+  }
+  @media (max-width:560px){
+    .receipt-grid > *{grid-column:span 12 !important}
+  }
+
+  .disclaimer{
+    margin-top:3.5rem;
+    padding:1.5rem 1.75rem;
+    border-left:2px solid var(--gold);
+    background:rgba(255,255,255,0.02);
+    font-size:.78rem;
+    line-height:1.7;
+    color:var(--muted);
+    font-style:italic;
+    letter-spacing:.01em;
+  }
+  .disclaimer strong{
+    font-style:normal;
+    color:var(--gold-2);
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-size:.7rem;
+    display:block;
+    margin-bottom:.4rem;
+    font-weight:500;
+  }
+
   /* ========== JOIN ========== */
   .join{
     background:linear-gradient(180deg, var(--ink) 0%, #0F2A1F 100%);
@@ -541,6 +708,7 @@
   </a>
   <div class="nav-links">
     <a href="#mission">Mission</a>
+    <a href="#receipts">Receipts</a>
     <a href="#value">Value</a>
     <a href="#join">Join</a>
     <a href="#book">Book</a>
@@ -616,10 +784,160 @@
   </div>
 </section>
 
+<section id="receipts" class="receipts">
+  <div class="wrap">
+    <div class="receipts-head reveal">
+      <div>
+        <span class="section-num">02 — The Receipts</span>
+        <h2>Proof <em>on the tape.</em></h2>
+      </div>
+      <p>
+        We don't teach theory. These are real positions, real contracts, and
+        real realized gains from the founder's own book — the same playbook
+        the community learns from every week.
+      </p>
+    </div>
+
+    <div class="stat-banner reveal">
+      <div class="stat">
+        <div class="stat-num">+<em>401</em>%</div>
+        <div class="stat-label">Options Total Return</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">+<em>230</em>%</div>
+        <div class="stat-label">PLTR Position</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">+<em>227</em>%</div>
+        <div class="stat-label">HIMS Position</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">8<em>+</em></div>
+        <div class="stat-label">Contracts Closed Green</div>
+      </div>
+    </div>
+
+    <div class="receipt-grid reveal">
+
+      <figure class="receipt r-1">
+        <img class="receipt-img" src="receipts/options-strategies.jpeg" alt="Options strategies total return of +$90,055 (+401.55%)" />
+        <figcaption class="receipt-meta">
+          <span class="receipt-ticker">Options Book</span>
+          <span class="receipt-gain">+401.55%</span>
+        </figcaption>
+        <div class="receipt-caption">Total return across active strategies</div>
+      </figure>
+
+      <figure class="receipt r-2">
+        <img class="receipt-img" src="receipts/total-gain-table.jpeg" alt="Total gain table: HIMS +227.08%, NVDA +50.64%, PLTR +230.73%, SOFI +60.71%" />
+        <figcaption class="receipt-meta">
+          <span class="receipt-ticker">Portfolio Ledger</span>
+          <span class="receipt-gain">HIMS · NVDA · PLTR · SOFI</span>
+        </figcaption>
+        <div class="receipt-caption">Total gain by symbol</div>
+      </figure>
+
+      <figure class="receipt r-3">
+        <img class="receipt-img" src="receipts/stocks-pltr-nvda.jpeg" alt="PLTR +152.31% and NVDA +74.15% stock positions" />
+        <figcaption class="receipt-meta">
+          <span class="receipt-ticker">PLTR · NVDA</span>
+          <span class="receipt-gain">+152% · +74%</span>
+        </figcaption>
+        <div class="receipt-caption">Core stock positions</div>
+      </figure>
+
+      <figure class="receipt r-4">
+        <img class="receipt-img" src="receipts/sofi-22-call.jpeg" alt="SOFI $22 Call, realized profit +$33,196 (+371.16%)" />
+        <figcaption class="receipt-meta">
+          <span class="receipt-ticker">SOFI $22C</span>
+          <span class="receipt-gain">+371.16%</span>
+        </figcaption>
+        <div class="receipt-caption">Closed Jul 29, 2025</div>
+      </figure>
+
+      <figure class="receipt r-5">
+        <img class="receipt-img" src="receipts/bmnr-call.jpeg" alt="BMNR $49 Call, realized profit +$5,940 (+267.57%)" />
+        <figcaption class="receipt-meta">
+          <span class="receipt-ticker">BMNR $49C</span>
+          <span class="receipt-gain">+267.57%</span>
+        </figcaption>
+        <div class="receipt-caption">Closed Sep 18, 2025</div>
+      </figure>
+
+      <figure class="receipt r-6">
+        <img class="receipt-img" src="receipts/sofi-215-call.jpeg" alt="SOFI $21.5 Call, realized profit +$13,440 (+133.34%)" />
+        <figcaption class="receipt-meta">
+          <span class="receipt-ticker">SOFI $21.5C</span>
+          <span class="receipt-gain">+133.34%</span>
+        </figcaption>
+        <div class="receipt-caption">Closed Jul 23, 2025</div>
+      </figure>
+
+      <figure class="receipt r-7">
+        <img class="receipt-img" src="receipts/crwv-call.jpeg" alt="CRWV $120 Call, realized profit +$5,760 (+128.00%)" />
+        <figcaption class="receipt-meta">
+          <span class="receipt-ticker">CRWV $120C</span>
+          <span class="receipt-gain">+128.00%</span>
+        </figcaption>
+        <div class="receipt-caption">Closed Sep 25, 2025</div>
+      </figure>
+
+      <figure class="receipt r-8">
+        <img class="receipt-img" src="receipts/msft-call.jpeg" alt="MSFT $450 Call, realized profit +$2,200 (+102.33%)" />
+        <figcaption class="receipt-meta">
+          <span class="receipt-ticker">MSFT $450C</span>
+          <span class="receipt-gain">+102.33%</span>
+        </figcaption>
+        <div class="receipt-caption">Closed Apr 16, 2026</div>
+      </figure>
+
+      <figure class="receipt r-9">
+        <img class="receipt-img" src="receipts/hims-call.png" alt="HIMS $40 Call open position, +$424 (+21.24%)" />
+        <figcaption class="receipt-meta">
+          <span class="receipt-ticker">HIMS $40C</span>
+          <span class="receipt-gain">+21.24%</span>
+        </figcaption>
+        <div class="receipt-caption">Open — 12/17/27 expiration</div>
+      </figure>
+
+      <figure class="receipt r-10">
+        <img class="receipt-img" src="receipts/mu-position.jpeg" alt="MU Micron Technology position, +$4,035.63 (+41.88%)" />
+        <figcaption class="receipt-meta">
+          <span class="receipt-ticker">MU</span>
+          <span class="receipt-gain">+41.88%</span>
+        </figcaption>
+        <div class="receipt-caption">Knowing when to buy</div>
+      </figure>
+
+      <figure class="receipt r-11">
+        <img class="receipt-img" src="receipts/oklo-position.jpeg" alt="OKLO position, 150 shares, +90.58%" />
+        <figcaption class="receipt-meta">
+          <span class="receipt-ticker">OKLO · 150 shares</span>
+          <span class="receipt-gain">+90.58%</span>
+        </figcaption>
+        <div class="receipt-caption">Core conviction hold</div>
+      </figure>
+
+    </div>
+
+    <div class="disclaimer reveal">
+      <strong>— A note on performance</strong>
+      The screenshots above reflect actual positions and realized trades from
+      the founder's personal brokerage. Past performance does not guarantee
+      future results. Trading options and equities involves substantial risk,
+      including the potential loss of principal. BAS Investments provides
+      education and community; nothing here is individualized investment advice.
+    </div>
+
+  </div>
+</section>
+
+<!-- receipts end -->
+
 <section id="value" class="value">
   <div class="wrap">
     <div class="reveal">
-      <span class="section-num">02 — Value</span>
+      <span class="section-num">03 — Value</span>
       <h2>Ten-plus modules. <em>One community.</em></h2>
       <p style="color:var(--muted); max-width:52ch; font-size:1.05rem">
         Members unlock a private Discord built for serious learners — a group chat,
@@ -679,7 +997,7 @@
 <section id="join" class="join">
   <div class="wrap">
     <div class="reveal">
-      <span class="section-num">03 — Join</span>
+      <span class="section-num">04 — Join</span>
       <h2>Two steps <em>to get started.</em></h2>
     </div>
 
@@ -721,7 +1039,7 @@
       </div>
 
       <div class="book-copy">
-        <span class="section-num">04 — Also by the author</span>
+        <span class="section-num">05 — Also by the author</span>
         <h2>A children's book on <em>financial literacy.</em></h2>
         <p>
           Beyond the community, I write a children's financial literacy series
